@@ -13,3 +13,7 @@
 .redBorder{
     border: 2px red solid;
 }
+
+.hidden {
+	display:none;
+}

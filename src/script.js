@@ -38,18 +38,20 @@ function changeDisplay() {
     if (A_tempArray[I_index] >= -10 && A_tempArray[I_index] < 0){
         O_temperature.setAttribute("class", "blueBorder")
         O_message.textContent = "Brrrrrrr, un peu froid ce matin, mets ta cagoule !"
+        O_message.classList.remove('hidden')
     }
     else if (A_tempArray[I_index] < 20) {
         O_temperature.setAttribute("class", "greenBorder")
-        O_message.textContent = ""
+        O_message.classList.add('hidden')
     }
     else if (A_tempArray[I_index] < 30) {
         O_temperature.setAttribute("class", "orangeBorder")
-        O_message.textContent = ""
+        message.classList.add('hidden')
     }
     else if (A_tempArray[I_index] < 40) {
         O_temperature.setAttribute("class", "redBorder")
         O_message.textContent = "Caliente ! Vamos a la playa, ho hoho hoho !!"
+        O_message.classList.remove('hidden')
     }
 
 }
