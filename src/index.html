@@ -5,23 +5,28 @@
     <meta charset="UTF-8">
     <title>Run JS</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer type="module" src="script.js"></script>
+
 </head>
 
 <body>
-    <h1>TD1 : Javascript</h1>
-    <section id="tempManage" aria-live="polite">
-        <h2>Température actuelle :</h2>
+    <h1>Javascript</h1>
+    <button id="displayTemp">Afficher la température</button>
+    <button id="displayHistory">Afficher l'historique</button>
+
+    <section id="tempManage" class="hidden" aria-live="polite">
+        <h2 id="tempTitle"></h2>
         <p id="message" class="hidden" role="alert"></p>
         <p id="temperature" style="font-size: 24px;">8</p>
-        <button id="prevButton" aria-label="Précédent"><</button>
-        <button id="nextButton" aria-label="Suivant">></button>
+        
     </section>
-    <section id="tempHistory" aria-live="polite">
-        <ul>
-            
+    <section id="tempHistory" class="hidden" aria-live="polite">
+        <h2 id="historyTitle">Historique des températures :</h2>
+        <ul id="historyList">
+
         </ul>
     </section>
-    <script src="script.js"></script>
+    
 </body>
 
 </html>

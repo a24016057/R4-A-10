@@ -1,58 +1,47 @@
-function getRandomInt(I_min, I_max) {
-    return Math.floor(Math.random() * (I_max - I_min) + I_min)
-}
+import { C_Observer } from "./Observer.js";
+import { C_TempHistory } from "./TempHistory.js";
+import { C_TempRealTime } from "./TempRealTime.js";
 
-var A_tempArray = []
-var I_index = 0
-for (I_i = 0; I_i < 20; I_i++) {
-    A_tempArray.push(getRandomInt(-10, 40))
-}
-console.log(A_tempArray)
+class C_script {
+    constructor() {
+        this.observer = new C_Observer();
+        this.observer.getRandValues();
 
-var O_message = document.getElementById("message")
-console.log(O_message)
-var O_temperature = document.getElementById("temperature")
-O_temperature.textContent = A_tempArray[0]+"°C"
-changeDisplay()
+        this.TempRealTime = new C_TempRealTime();
+        this.TempHistory = new C_TempHistory();
 
-var O_prev = document.getElementById("prevButton")
-O_prev.addEventListener("click", clickPrev)
-var O_next = document.getElementById("nextButton")
-O_next.addEventListener("click", clickNext)
+        this.observer.subscribe(this.TempRealTime);
+        this.observer.subscribe(this.TempHistory);
 
-function clickPrev() {
-    I_index = (I_index + A_tempArray.length - 1) % A_tempArray.length
-    console.log(I_index)
-    O_temperature.textContent = A_tempArray[I_index]+"°C"
-    changeDisplay()
-}
+        this.handlePage();
 
-function clickNext() {
-    I_index = (I_index + 1) % A_tempArray.length
-    console.log(I_index)
-    O_temperature.textContent = A_tempArray[I_index]+"°C"
-    changeDisplay()
-}
-
-function changeDisplay() {
-    if (A_tempArray[I_index] >= -10 && A_tempArray[I_index] < 0){
-        O_temperature.setAttribute("class", "blueBorder")
-        O_message.textContent = "Brrrrrrr, un peu froid ce matin, mets ta cagoule !"
-        O_message.classList.remove('hidden')
-    }
-    else if (A_tempArray[I_index] < 20) {
-        O_temperature.setAttribute("class", "greenBorder")
-        O_message.classList.add('hidden')
-    }
-    else if (A_tempArray[I_index] < 30) {
-        O_temperature.setAttribute("class", "orangeBorder")
-        message.classList.add('hidden')
-    }
-    else if (A_tempArray[I_index] < 40) {
-        O_temperature.setAttribute("class", "redBorder")
-        O_message.textContent = "Caliente ! Vamos a la playa, ho hoho hoho !!"
-        O_message.classList.remove('hidden')
+        this.observer.beginDelay();
     }
 
+    handlePage() {
+        
+        const O_displayTemp = document.getElementById("displayTemp");
+        const O_displayHistory = document.getElementById("displayHistory");
+
+        let O_tempManage = document.getElementById("tempManage");
+        let O_tempHistory = document.getElementById("tempHistory");
+
+        O_displayTemp.addEventListener("click", function () {
+            if (O_tempManage.className != "hidden") {
+                O_tempManage.className = "hidden";
+            } else {
+                O_tempManage.classList.remove("hidden");
+            }
+        });
+
+        O_displayHistory.addEventListener("click", function () {
+            if (O_tempHistory.className != "hidden") {
+                O_tempHistory.className = "hidden";
+            } else {
+                O_tempHistory.classList.remove("hidden");
+            }
+        });
+    }
 }
 
+new C_script();
